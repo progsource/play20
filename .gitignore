@@ -1,3 +1,4 @@
+*.TMP
 
 # Godot-specific ignores
 .import/
