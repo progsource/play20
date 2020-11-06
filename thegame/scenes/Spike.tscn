@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://assets/gfx/spritesheet.png" type="Texture" id=1]
+
+[node name="Spike" type="StaticBody2D"]
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 32, 0, 16, 16 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -8.07031, -8.00781, -2.65455, 1.83505, 0.36207, -3.28618, 3.519, -0.129254, 7.97484, -8.00781 )
