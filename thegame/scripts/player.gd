@@ -12,5 +12,10 @@ func _ready():
 
 func _move(_delta):
 	var _slide = move_and_slide(_velocity)
+	for i in get_slide_count():
+		var collision = get_slide_collision(i)
+		if collision.collider.is_in_group("spikes"):
+			GameManager.emit_signal("kill")
+			queue_free()
 	
 	position = GameManager.clamp_to_screen(position)
