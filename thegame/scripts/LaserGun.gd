@@ -19,7 +19,7 @@ var is_left = true
 
 func _enter_tree():
 	var laser_speed = GameManager.rng.randi_range(10, 20)
-	laser_op.init_object_pool("res://scenes/Laser.tscn", 5)
+	laser_op.init_object_pool("res://scenes/Laser.tscn", 3)
 	for laser in laser_op.unused_objects:
 		laser.lasergun = self
 		laser.speed = laser_speed
@@ -30,7 +30,7 @@ func _ready():
 
 	laser_spawn_timer = Timer.new()
 	laser_spawn_timer.autostart = true
-	laser_spawn_timer.wait_time = 1
+	laser_spawn_timer.wait_time = GameManager.rng.randi_range(1, 3)
 	laser_spawn_timer.one_shot = false
 	laser_spawn_timer.paused = true
 	# warning-ignore:return_value_discarded
