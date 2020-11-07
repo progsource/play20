@@ -11,6 +11,9 @@ func _ready():
 
 
 func _physics_process(delta):
+	if not lasergun.is_active:
+		return
+
 	var modifier = 1 if is_left else -1
 	var collision = move_and_collide(Vector2(modifier * delta * speed, 0))
 
