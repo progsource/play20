@@ -19,7 +19,15 @@ var speed_up: float = 1.0
 var spped_up_factor: float = 0.5
 var life: int = 1
 
+# --------------- other vars
+var rng = null
+
 # ---------------- functions
+func _enter_tree():
+	rng = RandomNumberGenerator.new()
+	rng.seed = OS.get_unix_time()
+	rng.randomize()
+
 func clamp_to_screen(position: Vector2) -> Vector2:
 	var clamped_position = Vector2.ZERO
 	var screen_size := get_viewport().get_visible_rect().size
