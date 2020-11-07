@@ -21,8 +21,6 @@ func _init():
 
 func _enter_tree():
 	if GameManager.best_fall < 0.0:
-		print("draw best")
-		print(GameManager.best_fall)
 		var best_fall_line = load("res://scenes/BestFallLine.tscn").instance()
 		best_fall_line.position.y = GameManager.best_fall * -1.0
 		$ParallaxLayer.add_child(best_fall_line)
