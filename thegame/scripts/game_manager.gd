@@ -8,24 +8,27 @@ signal stop_time(toogle)
 # warning-ignore:unused_signal
 signal speed_up(toogle)
 # warning-ignore:unused_signal
-signal stop_action()
+signal action_toogle(toogle)
+# warning-ignore:unused_signal
+signal action_triggered(toogle)
 # warning-ignore:unused_signal
 signal kill()
 
 # ---------------- player vars
-var gravity: float = 100.0
+var gravity: float = 50.0
 var stop_time: float = 1.0
 var speed_up: float = 1.0
-var spped_up_factor: float = 0.5
+var spped_up_factor: float = 1
 var life: int = 1
 
 # --------------- other vars
 var rng : RandomNumberGenerator = null
+var can_use_action : bool = true
 
 # ---------------- functions
 func _ready():
 	# warning-ignore:return_value_discarded
-	GameManager.connect("stop_action", self, "_on_stop_action")
+	GameManager.connect("action_toogle", self, "_on_action_toogle")
 	
 func _enter_tree():
 	rng = RandomNumberGenerator.new()
@@ -49,15 +52,21 @@ static func get_input_direction(event=Input) -> Vector2:
 	).normalized()
 
 func _unhandled_input(event: InputEvent):
-	if event.is_action_pressed("stop_time"):
-		emit_signal("stop_time", true)
-	if event.is_action_released("stop_time"):
-		emit_signal("stop_time", false)
-	if event.is_action_pressed("speed_up"):
-		emit_signal("speed_up", true)
-	if event.is_action_released("speed_up"):
-		emit_signal("speed_up", false)
+	var _stop_time = event.is_action_pressed("stop_time", true)
+	var _speed_up = event.is_action_pressed("speed_up", true)
 
-func _on_stop_action():
+	if can_use_action:
+		if _stop_time or _speed_up:
+			emit_signal("action_triggered", true)
+		else:
+			emit_signal("action_triggered", false)
+		emit_signal("stop_time", _stop_time)
+		emit_signal("speed_up", _speed_up)
+		return
+
+	emit_signal("action_triggered", false)
 	emit_signal("stop_time", false)
 	emit_signal("speed_up", false)
+
+func _on_action_toogle(toogle):
+	can_use_action = toogle

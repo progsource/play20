@@ -9,6 +9,8 @@ var _velocity = Vector2.ZERO
 var _deadly_groups = ["spikes", "laser"]
 
 func _ready():
+	# warning-ignore:return_value_discarded
+	GameManager.connect("speed_up", self, "_on_speed_up")
 	yield(get_tree(), "idle_frame")
 
 func _move(_delta):
@@ -35,3 +37,10 @@ func _has_deadly_collision(var collision) -> bool :
 func _kill() -> void :
 	GameManager.emit_signal("kill")
 	queue_free()
+
+func _on_speed_up(toogle):
+	if toogle:
+		max_speed = GameManager.gravity + GameManager.gravity * GameManager.spped_up_factor
+		print(max_speed)
+	else:
+		max_speed = GameManager.gravity

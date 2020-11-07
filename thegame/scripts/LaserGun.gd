@@ -18,7 +18,7 @@ var is_left = true
 
 
 func _enter_tree():
-	var laser_speed = GameManager.rng.randi_range(10, 20)
+	var laser_speed = GameManager.rng.randi_range(20, 40)
 	laser_op.init_object_pool("res://scenes/Laser.tscn", 3)
 	for laser in laser_op.unused_objects:
 		laser.lasergun = self
@@ -39,17 +39,9 @@ func _ready():
 
 	# warning-ignore:return_value_discarded
 	GameManager.connect("stop_time", self, "_on_stop_time_triggered")
-	# warning-ignore:return_value_discarded
-	GameManager.connect("stop_action", self, "_on_stop_action_triggered")
-
 
 func _on_stop_time_triggered(toogle):
 	is_active = !toogle
-
-
-func _on_stop_action_triggered():
-	is_active = true
-
 
 func _process(_delta):
 	if not is_enabled or not is_active:
