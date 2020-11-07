@@ -2,7 +2,7 @@ extends ColorRect
 
 
 export var speed_load : int = 30
-export var speed_use : int = 30
+export var speed_use : int = 50
 export var action_toogle : int = 25
 
 var is_action_active := false 
