@@ -1,6 +1,6 @@
 extends ParallaxBackground
 
-var speed : float = 20.0
+var speed : float = 30.0
 var last_created_object_distance : float = 110.0
 var object_distance : float = 100.0
 
@@ -15,7 +15,7 @@ var platforms_op = load("res://scripts/ObjectPool.gd").new()
 
 func _init():
 	laser_gun_op.init_object_pool("res://scenes/LaserGun.tscn", 10)
-	platforms_op.init_object_pool("res://scenes/Platform.tscn", 3)
+	platforms_op.init_object_pool("res://scenes/Platform.tscn", 10)
 
 
 func _process(delta):
@@ -65,7 +65,6 @@ func _add_laser_gun(var is_left : bool) -> bool:
 		gun.position = Vector2(laser_gun_left_pos, (-1 * scroll_offset.y) + laser_gun_vertical_start_pos)
 	else:
 		gun.rotation_degrees = 180.0
-		# TODO remove +30 as soon as laserguns are randomly generated
 		gun.position = Vector2(laser_gun_right_pos, (-1 * scroll_offset.y) + laser_gun_vertical_start_pos)
 
 	$ParallaxLayer.add_child(gun)
