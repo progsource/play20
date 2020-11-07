@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="LineShape2D" id=1]
+d = 16.9635
+
+[node name="Wall" type="StaticBody2D"]
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PoolVector2Array( 0, 0, 0, 320 )
+width = 20.0
+default_color = Color( 0.294118, 0.239216, 0.266667, 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 180 )
+rotation = 1.5708
+scale = Vector2( 2, 1 )
+shape = SubResource( 1 )
