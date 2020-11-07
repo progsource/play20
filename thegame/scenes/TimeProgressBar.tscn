@@ -30,7 +30,6 @@ margin_bottom = 139.0
 rect_rotation = -90.0
 custom_styles/fg = SubResource( 1 )
 custom_styles/bg = SubResource( 2 )
-value = 42.0
 rounded = true
 percent_visible = false
 __meta__ = {
