@@ -19,6 +19,8 @@ func _ready():
 	_add_laser_gun(true)
 	# warning-ignore:return_value_discarded
 	_add_laser_gun(false)
+	
+	_remove_laser_gun($ObjectContainer.get_child(0))
 
 #func _process(delta):
 #	pass
@@ -37,4 +39,13 @@ func _add_laser_gun(var is_left : bool) -> bool:
 		gun.position = Vector2(laser_gun_right_pos, laser_gun_vertical_start_pos)
 
 	$ObjectContainer.add_child(gun)
+
+	gun.is_active = true
+	gun.is_enabled = true
+	
 	return true
+
+func _remove_laser_gun(var gun) -> void:
+	gun.is_enabled = false
+	$ObjectContainer.remove_child(gun)
+	laser_gun_op.return_object(gun)
