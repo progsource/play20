@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 var id : int = -1
-var speed = 14
+var speed = 20
 var lasergun = null
 var is_left = true
 

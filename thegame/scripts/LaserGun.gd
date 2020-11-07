@@ -18,9 +18,11 @@ var is_left = true
 
 
 func _enter_tree():
+	var laser_speed = GameManager.rng.randi_range(10, 20)
 	laser_op.init_object_pool("res://scenes/Laser.tscn", 5)
 	for laser in laser_op.unused_objects:
 		laser.lasergun = self
+		laser.speed = laser_speed
 
 
 func _ready():

@@ -45,7 +45,7 @@ func _add_laser_gun(var is_left : bool) -> bool:
 
 	gun.is_active = true
 	gun.is_enabled = true
-	
+
 	return true
 
 func _remove_laser_gun(var gun) -> void:
