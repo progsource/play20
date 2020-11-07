@@ -15,3 +15,5 @@ region_rect = Rect2( 16, 0, 16, 16 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PoolVector2Array( -7.98945, -7.93961, -5.01798, -7.98928, -0.0287557, -2.03086, -0.0550337, 1.96339, -4.97933, 7.96929, -8.02667, 7.96929 )
+
+[node name="LaserContainer" type="Node2D" parent="."]

@@ -20,7 +20,7 @@ func _ready():
 	# warning-ignore:return_value_discarded
 	_add_laser_gun(false)
 	
-	_remove_laser_gun($ObjectContainer.get_child(0))
+#	_remove_laser_gun($ObjectContainer.get_child(0))
 
 #func _process(delta):
 #	pass
