@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scripts/BestFallLine.gd" type="Script" id=1]
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 90.927, 5.84649 )
+
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://assets/fonts/Kenney Mini Square.ttf"
+
+[sub_resource type="DynamicFont" id=2]
+font_data = SubResource( 1 )
+
+[node name="BestFallLine" type="StaticBody2D"]
+collision_layer = 2
+collision_mask = 2147483650
+script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 89.4878, 8.02715 )
+shape = SubResource( 3 )
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PoolVector2Array( 0, 0, 70, 0 )
+width = 2.0
+default_color = Color( 0.72549, 0.478431, 0.376471, 1 )
+
+[node name="Line2D2" type="Line2D" parent="."]
+position = Vector2( 110, 0 )
+points = PoolVector2Array( 0, 0, 70, 0 )
+width = 2.0
+default_color = Color( 0.72549, 0.478431, 0.376471, 1 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 70.5946
+margin_top = -12.1487
+margin_right = 110.595
+margin_bottom = 6.85135
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.72549, 0.478431, 0.376471, 1 )
+text = "Best"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}

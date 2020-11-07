@@ -12,6 +12,8 @@ signal action_toogle(toogle)
 # warning-ignore:unused_signal
 signal action_triggered(toogle)
 # warning-ignore:unused_signal
+signal prekill()
+# warning-ignore:unused_signal
 signal kill()
 
 # ---------------- player vars
@@ -20,6 +22,8 @@ var stop_time: float = 1.0
 var speed_up: float = 1.0
 var speed_up_factor: float = 1
 var life: int = 1
+var player_pos_y : float = 0.0
+var best_fall : float = 0.0
 
 # --------------- other vars
 var rng : RandomNumberGenerator = null

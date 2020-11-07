@@ -19,11 +19,28 @@ func _init():
 	doors_op.init_object_pool("res://scenes/Door.tscn", 10)
 
 
+func _enter_tree():
+	if GameManager.best_fall < 0.0:
+		print("draw best")
+		print(GameManager.best_fall)
+		var best_fall_line = load("res://scenes/BestFallLine.tscn").instance()
+		best_fall_line.position.y = GameManager.best_fall * -1.0
+		$ParallaxLayer.add_child(best_fall_line)
+
+func _ready():
+	# warning-ignore:return_value_discarded
+	GameManager.connect("prekill", self, "_on_kill")
+
+
+func _on_kill():
+	var fall = scroll_offset.y - GameManager.player_pos_y
+	GameManager.best_fall = fall if fall < GameManager.best_fall else GameManager.best_fall
+
 func _process(delta):
 	var add_distance = delta * speed
 	scroll_offset.y -= add_distance
 	last_created_object_distance += add_distance
-	
+
 	if last_created_object_distance > object_distance:
 		_spawn_object()
 		object_distance = GameManager.rng.randi_range(40, 140)
@@ -32,7 +49,7 @@ func _process(delta):
 
 func _spawn_object():
 	var rand = GameManager.rng.randi_range(0, 100)
-	
+
 	if rand < 30:
 		# warning-ignore:return_value_discarded
 		_add_laser_gun(true)
@@ -56,6 +73,8 @@ func _physics_process(_delta):
 			_remove_platform(collision.collider)
 		if collision.collider.is_in_group("doors"):
 			_remove_door(collision.collider)
+		if collision.collider.is_in_group("bestfallline"):
+			collision.collider.queue_free()
 
 
 # returns false if it failed
@@ -90,15 +109,15 @@ func _add_platform() -> bool :
 	var platform = platforms_op.get_object()
 	if not platform:
 		return false
-	
+
 	var pos = Vector2()
 	pos.x = GameManager.rng.randi_range(30, 100)
 	pos.y = (-1 * scroll_offset.y) + laser_gun_vertical_start_pos
-	
+
 	platform.position = pos
-	
+
 	$ParallaxLayer.add_child(platform)
-	
+
 	return true
 
 func _remove_platform(var platform) -> void:
@@ -110,11 +129,11 @@ func _add_door() -> bool :
 	var door = doors_op.get_object()
 	if not door:
 		return false
-	
+
 	door.position.y = (-1 * scroll_offset.y) + laser_gun_vertical_start_pos
-	
+
 	$ParallaxLayer.add_child(door)
-	
+
 	return true
 
 func _remove_door(var door) -> void :

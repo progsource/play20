@@ -15,6 +15,7 @@ func _ready():
 
 func _move(_delta):
 	var _slide = move_and_slide(_velocity)
+	GameManager.player_pos_y = position.y
 	for i in get_slide_count():
 		var collision = get_slide_collision(i)
 		if _has_deadly_collision(collision):
@@ -35,6 +36,7 @@ func _has_deadly_collision(var collision) -> bool :
 	return false
 
 func _kill() -> void :
+	GameManager.emit_signal("prekill")
 	GameManager.emit_signal("kill")
 	queue_free()
 
