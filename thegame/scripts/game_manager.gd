@@ -18,7 +18,7 @@ signal kill()
 var gravity: float = 50.0
 var stop_time: float = 1.0
 var speed_up: float = 1.0
-var spped_up_factor: float = 1
+var speed_up_factor: float = 1
 var life: int = 1
 
 # --------------- other vars

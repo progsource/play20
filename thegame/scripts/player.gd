@@ -40,7 +40,7 @@ func _kill() -> void :
 
 func _on_speed_up(toogle):
 	if toogle:
-		max_speed = GameManager.gravity + GameManager.gravity * GameManager.spped_up_factor
+		max_speed = GameManager.gravity + GameManager.gravity * GameManager.speed_up_factor
 		print(max_speed)
 	else:
 		max_speed = GameManager.gravity
