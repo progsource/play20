@@ -30,6 +30,9 @@ func _ready():
 	# warning-ignore:return_value_discarded
 	GameManager.connect("action_toogle", self, "_on_action_toogle")
 	
+	# warning-ignore:return_value_discarded
+	GameManager.connect("kill", self, "_on_kill")
+	
 func _enter_tree():
 	rng = RandomNumberGenerator.new()
 	rng.seed = OS.get_unix_time()
@@ -70,3 +73,7 @@ func _unhandled_input(event: InputEvent):
 
 func _on_action_toogle(toogle):
 	can_use_action = toogle
+
+func _on_kill():
+	# warning-ignore:return_value_discarded
+	get_tree().change_scene("res://scenes/StartScreen.tscn")
