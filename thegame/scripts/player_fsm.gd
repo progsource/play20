@@ -19,12 +19,12 @@ func _state_logic(delta):
 		states.fall:
 			parent._speed = parent.max_speed
 			parent._velocity = Vector2.DOWN * parent._speed
-			parent._move(delta)
 		states.move:
 			parent._last_input_direction = input.direction if input.direction != Vector2.ZERO else parent._last_input_direction
 			parent._speed = parent.max_speed
 			parent._velocity = input.direction * parent._speed
-			parent._move(delta)
+	
+	parent._move(delta)
 
 func _get_transition(_delta):
 	var input = get_raw_input()

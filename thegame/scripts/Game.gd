@@ -4,7 +4,7 @@ extends Node2D
 var laser_gun_op = load("res://scripts/ObjectPool.gd").new()
 export var laser_gun_left_pos : float = 0.0
 export var laser_gun_right_pos : float = 180.0
-const laser_gun_vertical_start_pos : float = 50.0
+const laser_gun_vertical_start_pos : float = 90.0
 
 var doors_op = load("res://scripts/ObjectPool.gd").new()
 
@@ -39,7 +39,7 @@ func _add_laser_gun(var is_left : bool) -> bool:
 	else:
 		gun.rotation_degrees = 180.0
 		# TODO remove +30 as soon as laserguns are randomly generated
-		gun.position = Vector2(laser_gun_right_pos, laser_gun_vertical_start_pos + 30)
+		gun.position = Vector2(laser_gun_right_pos, laser_gun_vertical_start_pos + 226)
 
 	$ObjectContainer.add_child(gun)
 
