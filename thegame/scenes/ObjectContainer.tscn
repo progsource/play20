@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scripts/ObjectContainer.gd" type="Script" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 97.25, 10 )
+
+[node name="ObjectContainer" type="ParallaxBackground"]
+script = ExtResource( 1 )
+laser_gun_left_pos = 18.0
+laser_gun_right_pos = 162.0
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+
+[node name="ObjectDestroyer" type="KinematicBody2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ObjectDestroyer"]
+position = Vector2( 89.5, -21 )
+shape = SubResource( 1 )

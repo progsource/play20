@@ -5,27 +5,36 @@ var id : int = -1
 
 # it is enabled if it was added to the scene
 # if it gets removed from the scene, it is disabled again
-var is_enabled : bool = false
+var is_enabled : bool = false setget set_is_enabled
 
 # it is active if time is not stopped
 var is_active : bool = false
 
 var laser_op = load("res://scripts/ObjectPool.gd").new()
 var laser_spawn_timer : Timer = null
+var laser_speed : int = 1
 
 # either it is left or right
 var is_left = true
 
+func set_is_enabled(var enabled : bool) -> void :
+	is_enabled = enabled
+	
+	if not is_enabled:
+		for c in $LaserContainer.get_children():
+			if c.is_in_group("laser"):
+				remove_laser(c)
+
 
 func _enter_tree():
-	var laser_speed = GameManager.rng.randi_range(20, 40)
+	laser_speed = GameManager.rng.randi_range(20, 40)
+
+func _ready():
 	laser_op.init_object_pool("res://scenes/Laser.tscn", 3)
 	for laser in laser_op.unused_objects:
 		laser.lasergun = self
 		laser.speed = laser_speed
 
-
-func _ready():
 	add_to_group("laserguns")
 
 	laser_spawn_timer = Timer.new()
