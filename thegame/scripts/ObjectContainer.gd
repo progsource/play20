@@ -7,15 +7,16 @@ var object_distance : float = 100.0
 var laser_gun_op = load("res://scripts/ObjectPool.gd").new()
 export var laser_gun_left_pos : float = 0.0
 export var laser_gun_right_pos : float = 180.0
-const laser_gun_vertical_start_pos : float = 330.0
+const laser_gun_vertical_start_pos : float = 360.0
 
-#var doors_op = load("res://scripts/ObjectPool.gd").new()
+var doors_op = load("res://scripts/ObjectPool.gd").new()
 
 var platforms_op = load("res://scripts/ObjectPool.gd").new()
 
 func _init():
 	laser_gun_op.init_object_pool("res://scenes/LaserGun.tscn", 10)
 	platforms_op.init_object_pool("res://scenes/Platform.tscn", 10)
+	doors_op.init_object_pool("res://scenes/Door.tscn", 10)
 
 
 func _process(delta):
@@ -32,12 +33,15 @@ func _process(delta):
 func _spawn_object():
 	var rand = GameManager.rng.randi_range(0, 100)
 	
-	if rand < 35:
+	if rand < 30:
 		# warning-ignore:return_value_discarded
 		_add_laser_gun(true)
-	elif rand < 70:
+	elif rand < 60:
 		# warning-ignore:return_value_discarded
 		_add_laser_gun(false)
+	elif rand < 80:
+		# warning-ignore:return_value_discarded
+		_add_door()
 	else:
 		# warning-ignore:return_value_discarded
 		_add_platform()
@@ -50,6 +54,8 @@ func _physics_process(_delta):
 			_remove_laser_gun(collision.collider)
 		if collision.collider.is_in_group("platforms"):
 			_remove_platform(collision.collider)
+		if collision.collider.is_in_group("doors"):
+			_remove_door(collision.collider)
 
 
 # returns false if it failed
@@ -98,3 +104,20 @@ func _add_platform() -> bool :
 func _remove_platform(var platform) -> void:
 	$ParallaxLayer.remove_child(platform)
 	platforms_op.return_object(platform)
+
+
+func _add_door() -> bool :
+	var door = doors_op.get_object()
+	if not door:
+		return false
+	
+	door.position.y = (-1 * scroll_offset.y) + laser_gun_vertical_start_pos
+	
+	$ParallaxLayer.add_child(door)
+	
+	return true
+
+func _remove_door(var door) -> void :
+	$ParallaxLayer.remove_child(door)
+	doors_op.return_object(door)
+
