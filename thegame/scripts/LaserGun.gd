@@ -43,8 +43,8 @@ func _ready():
 	GameManager.connect("stop_action", self, "_on_stop_action_triggered")
 
 
-func _on_stop_time_triggered():
-	is_active = false
+func _on_stop_time_triggered(toogle):
+	is_active = !toogle
 
 
 func _on_stop_action_triggered():

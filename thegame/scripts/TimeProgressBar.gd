@@ -7,9 +7,9 @@ var is_action_active := false
 
 func _ready():
 	# warning-ignore:return_value_discarded
-	GameManager.connect("stop_time", self, "_on_stop_time_triggered")
+	GameManager.connect("stop_time", self, "_on_action_triggered")
 	# warning-ignore:return_value_discarded
-	GameManager.connect("speed_up", self, "_on_speed_up_triggered")
+	GameManager.connect("speed_up", self, "_on_action_triggered")
 
 
 func _process(delta):
@@ -27,19 +27,12 @@ func _process(delta):
 	$ProgressBar.value = progress
 
 
-func _on_stop_time_triggered():
+func _on_action_triggered(toogle):
+	is_action_active = toogle
+	
 	if is_action_active:
 		return
 
 	var progress = $ProgressBar.value
-	if progress > 0:
-		is_action_active = true
-
-
-func _on_speed_up_triggered():
-	if is_action_active:
-		return
-
-	var progress = $ProgressBar.value
-	if progress > 0:
-		is_action_active = true
+	if progress <= 0:
+		GameManager.emit_signal("stop_action")
