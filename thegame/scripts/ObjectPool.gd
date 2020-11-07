@@ -14,13 +14,14 @@ func init_object_pool(var packed : String, var object_pool_size : int) -> void :
 		scene.id = i
 		unused_objects.append(scene)
 
+# If no objects are available in the pool, this will return null
 func get_object():
 	if unused_objects.size() == 0:
 		return null
-	
+
 	var obj = unused_objects.pop_back()
 	used_objects.append(obj)
-	
+
 	return obj
 
 func return_object(var return_obj) -> void :
@@ -30,4 +31,3 @@ func return_object(var return_obj) -> void :
 			used_objects.remove(i)
 			unused_objects.append(return_obj)
 			break
-

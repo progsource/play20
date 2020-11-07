@@ -30,7 +30,7 @@ func _process(delta):
 func _on_stop_time_triggered():
 	if is_action_active:
 		return
-	
+
 	var progress = $ProgressBar.value
 	if progress > 0:
 		is_action_active = true

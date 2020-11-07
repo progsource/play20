@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/gfx/spritesheet.png" type="Texture" id=1]
+[ext_resource path="res://scripts/LaserGun.gd" type="Script" id=2]
+
+[node name="LaserGun" type="StaticBody2D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 16, 0, 16, 16 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -7.98945, -7.93961, -5.01798, -7.98928, -0.0287557, -2.03086, -0.0550337, 1.96339, -4.97933, 7.96929, -8.02667, 7.96929 )

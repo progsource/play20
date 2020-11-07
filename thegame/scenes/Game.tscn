@@ -8,6 +8,8 @@
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 5 )
+laser_gun_left_pos = 18.0
+laser_gun_right_pos = 162.0
 
 [node name="Background" type="ColorRect" parent="."]
 margin_right = 180.0
@@ -24,6 +26,8 @@ position = Vector2( 180, 320 )
 rotation = 3.14159
 
 [node name="Spikes" parent="." instance=ExtResource( 1 )]
+
+[node name="ObjectContainer" type="Node2D" parent="."]
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 94, 43 )
