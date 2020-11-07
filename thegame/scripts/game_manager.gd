@@ -8,6 +8,8 @@ signal stop_time()
 # warning-ignore:unused_signal
 signal speed_up()
 # warning-ignore:unused_signal
+signal stop_action()
+# warning-ignore:unused_signal
 signal kill()
 
 # ---------------- player vars

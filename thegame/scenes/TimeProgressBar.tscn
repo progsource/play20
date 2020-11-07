@@ -1,4 +1,6 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scripts/TimeProgressBar.gd" type="Script" id=1]
 
 [sub_resource type="StyleBoxLine" id=1]
 color = Color( 0.556863, 0.623529, 0.490196, 1 )
@@ -15,6 +17,7 @@ thickness = 4
 [node name="TimeProgressBar" type="ColorRect"]
 margin_right = 6.0
 margin_bottom = 120.0
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
