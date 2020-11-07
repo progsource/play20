@@ -1,7 +1,7 @@
 extends Node2D
 
 onready var player := $Player
-onready var popup := $Popup
+onready var popup := $HUD/Popup
 
 func _ready():
 	# warning-ignore:return_value_discarded
@@ -10,7 +10,7 @@ func _ready():
 
 func _on_kill():
 	_pause()
-	$Popup.popup()
+	popup.popup()
 	
 func _pause():
 	player.set_process_input(false)

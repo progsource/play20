@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://scenes/TimeProgressBar.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/Popup.tscn" type="PackedScene" id=2]
 
 [node name="HUD" type="CanvasLayer"]
 
@@ -21,3 +22,5 @@ margin_left = -8.0
 margin_top = -122.0
 margin_right = -2.0
 margin_bottom = -2.0
+
+[node name="Popup" parent="." instance=ExtResource( 2 )]
