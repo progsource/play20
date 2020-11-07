@@ -13,9 +13,14 @@ var is_active : bool = false
 var laser_op = load("res://scripts/ObjectPool.gd").new()
 var laser_spawn_timer : Timer = null
 
+# either it is left or right
+var is_left = true
+
 
 func _enter_tree():
 	laser_op.init_object_pool("res://scenes/Laser.tscn", 5)
+	for laser in laser_op.unused_objects:
+		laser.lasergun = self
 
 
 func _ready():
@@ -62,4 +67,10 @@ func _spawn_laser() -> void :
 		return
 
 	laser.position = $LaserContainer.position
+	laser.is_left = is_left
 	$LaserContainer.add_child(laser)
+
+
+func remove_laser(var laser) -> void :
+	laser_op.return_object(laser)
+	$LaserContainer.remove_child(laser)

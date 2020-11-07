@@ -31,12 +31,15 @@ func _add_laser_gun(var is_left : bool) -> bool:
 	if not gun:
 		return false
 
+	gun.is_left = is_left
+
 	if is_left:
 		gun.rotation_degrees = 0.0
 		gun.position = Vector2(laser_gun_left_pos, laser_gun_vertical_start_pos)
 	else:
 		gun.rotation_degrees = 180.0
-		gun.position = Vector2(laser_gun_right_pos, laser_gun_vertical_start_pos)
+		# TODO remove +30 as soon as laserguns are randomly generated
+		gun.position = Vector2(laser_gun_right_pos, laser_gun_vertical_start_pos + 30)
 
 	$ObjectContainer.add_child(gun)
 
