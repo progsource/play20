@@ -20,7 +20,7 @@ var spped_up_factor: float = 0.5
 var life: int = 1
 
 # --------------- other vars
-var rng = null
+var rng : RandomNumberGenerator = null
 
 # ---------------- functions
 func _enter_tree():
