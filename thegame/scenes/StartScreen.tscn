@@ -16,7 +16,7 @@ __meta__ = {
 margin_right = 180.0
 margin_bottom = 320.0
 rect_min_size = Vector2( 180, 320 )
-color = Color( 0.662745, 0.611765, 0.552941, 1 )
+color = Color( 0.866667, 0.811765, 0.6, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
