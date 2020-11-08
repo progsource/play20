@@ -34,9 +34,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download Artifact (Web)
-      uses: actions/download-artifact@v2
-        with:
-          name: ${EXPORT_NAME}-web
+        uses: actions/download-artifact@v2
+          with:
+            name: ${EXPORT_NAME}-web
       - name: deploy to itch.io (Web)
         uses: josephbmanley/butler-publish-itchio-action@master
         env:
