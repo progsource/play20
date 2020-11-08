@@ -20,7 +20,7 @@ func _move(_delta):
 			_kill()
 
 	# in case there was no slide, we still want to check for collisions
-	var collision_test = move_and_collide(Vector2(0, -4), true, true, true)
+	var collision_test = check_collision()
 	if _has_deadly_collision(collision_test):
 		_kill()
 
@@ -37,3 +37,6 @@ func _kill() -> void :
 	GameManager.emit_signal("prekill")
 	GameManager.emit_signal("kill")
 	queue_free()
+	
+func check_collision():
+	return  move_and_collide(Vector2(0, -4), true, true, true)

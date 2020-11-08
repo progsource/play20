@@ -47,3 +47,6 @@ collision_mask = 8
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MeteorStop"]
 position = Vector2( 90.5841, -3.97302 )
 shape = SubResource( 1 )
+
+[node name="OtimalPosition" type="Position2D" parent="."]
+position = Vector2( 91, 136 )
