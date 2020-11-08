@@ -33,8 +33,9 @@ func _unpause():
 func _physics_process(_delta):
 	if player.check_collision() or player.position.y == optimal_position.y:
 		return
-		
-	if player.position.distance_to(optimal_position) > 5:
+	
+	var _distance = Vector2(0.0, player.position.y).distance_to(Vector2(0.0, optimal_position.y))
+	if _distance > 5:
 		var _velocity = Vector2(0.0, position.direction_to(optimal_position).y) * GameManager.gravity
 		_velocity = player.move_and_slide(_velocity)
 	else:
