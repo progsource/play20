@@ -32,6 +32,9 @@ var platform_probabilty = 30
 var spike_platform_probability = 30
 var laser_left_probability = 40
 var laser_right_probability = 40
+var speed_load : int = 30
+var speed_use : int = 50
+var action_toogle : int = 25
 
 # --------------- other vars
 var rng : RandomNumberGenerator = null
