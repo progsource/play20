@@ -23,10 +23,11 @@ jobs:
         run: |
           cd ./thegame
           godot -v --export "HTML5" ../build/web/index.html
-      - name: Upload Artifact
+      - name: Zip Artifact
         uses: montudor/action-zip@v0.1.0
         with:
-          args: unzip -qq ${{ env.EXPORT_NAME }}-web.zip -d ../build/web/
+          args: unzip -qq ${{ env.EXPORT_NAME }}-web.zip -d ./build/web/
+      - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
           name: ${{ env.EXPORT_NAME }}-web.zip
