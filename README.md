@@ -2,7 +2,7 @@
 
 You are the little meteor who wants to fly as far as possible.
 
-You can play with time borders to stop everything around you.
+You can [play](https://progsource.itch.io/pew-pew-meteor) with time borders to stop everything around you.
 
 Try to stay alive as long as you can.
 
