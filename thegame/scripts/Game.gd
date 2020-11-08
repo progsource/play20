@@ -30,7 +30,7 @@ func _unpause():
 	GameManager.set_process_unhandled_input(true)
 	get_tree().paused = false
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if player.check_collision() or player.position.y == optimal_position.y:
 		return
 		
