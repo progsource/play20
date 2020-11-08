@@ -30,6 +30,7 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
         with:
+          name: ${{ env.EXPORT_NAME }}-web
           path: ${{ env.EXPORT_NAME }}-web.zip
   publish-web:
     name: Publish to itch.io (Web)
@@ -39,7 +40,7 @@ jobs:
       - name: Download Artifact (Web)
         uses: actions/download-artifact@v2
         with:
-          name: ${{ env.EXPORT_NAME }}-web.zip
+          name: ${{ env.EXPORT_NAME }}-web
       - name: deploy to itch.io (Web)
         uses: josephbmanley/butler-publish-itchio-action@master
         env:
