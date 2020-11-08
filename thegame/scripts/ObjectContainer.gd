@@ -1,6 +1,6 @@
 extends ParallaxBackground
 
-var speed : float = 30.0
+var speed : float = GameManager.gravity
 var last_created_object_distance : float = 110.0
 var object_distance : float = 100.0
 
@@ -28,6 +28,8 @@ func _enter_tree():
 func _ready():
 	# warning-ignore:return_value_discarded
 	GameManager.connect("prekill", self, "_on_kill")
+	# warning-ignore:return_value_discarded
+	GameManager.connect("speed_up", self, "_on_speed_up")
 
 
 func _on_kill():
@@ -138,3 +140,8 @@ func _remove_door(var door) -> void :
 	$ParallaxLayer.remove_child(door)
 	doors_op.return_object(door)
 
+func _on_speed_up(toogle):
+	if toogle:
+		speed = GameManager.gravity + GameManager.gravity * GameManager.speed_up_factor
+	else:
+		speed = GameManager.gravity

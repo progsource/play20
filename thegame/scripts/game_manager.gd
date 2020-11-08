@@ -52,7 +52,7 @@ static func get_input_direction(event=Input) -> Vector2:
 	return Vector2(
 		float(event.get_action_strength("move_right")) -
 		float(event.get_action_strength("move_left")),
-		Vector2.DOWN.y
+		Vector2.ZERO.y
 	).normalized()
 
 func _unhandled_input(event: InputEvent):
