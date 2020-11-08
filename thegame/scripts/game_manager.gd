@@ -25,6 +25,14 @@ var life: int = 1
 var player_pos_y : float = 0.0
 var best_fall : float = 0.0
 
+# --------------- balancing
+var door_probability = 10
+var spike_door_probabilty = 20
+var platform_probabilty = 30
+var spike_platform_probability = 30
+var laser_left_probability = 40
+var laser_right_probability = 40
+
 # --------------- other vars
 var rng : RandomNumberGenerator = null
 var can_use_action : bool = true

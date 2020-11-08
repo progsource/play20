@@ -10,13 +10,14 @@ export var laser_gun_right_pos : float = 180.0
 const laser_gun_vertical_start_pos : float = 360.0
 
 var doors_op = load("res://scripts/ObjectPool.gd").new()
-
+var spike_doors_op = load("res://scripts/ObjectPool.gd").new()
 var platforms_op = load("res://scripts/ObjectPool.gd").new()
 
 func _init():
 	laser_gun_op.init_object_pool("res://scenes/LaserGun.tscn", 10)
 	platforms_op.init_object_pool("res://scenes/Platform.tscn", 10)
 	doors_op.init_object_pool("res://scenes/Door.tscn", 10)
+	spike_doors_op.init_object_pool("res://scenes/SpikeDoor.tscn", 10)
 
 
 func _enter_tree():
@@ -46,20 +47,41 @@ func _process(delta):
 
 
 func _spawn_object():
-	var rand = GameManager.rng.randi_range(0, 100)
+	var max_probability = (GameManager.door_probability +
+		GameManager.spike_door_probabilty +
+		GameManager.platform_probabilty +
+		GameManager.spike_platform_probability +
+		GameManager.laser_left_probability +
+		GameManager.laser_right_probability) 
+	var rand = GameManager.rng.randi_range(0, max_probability)
+	
+	var max_door_prob = GameManager.door_probability
+	var max_spike_door_prob = max_door_prob + GameManager.spike_door_probabilty
+	var max_platform_prob = max_spike_door_prob + GameManager.platform_probabilty
+	var max_spike_platform_prob = max_platform_prob + GameManager.spike_platform_probability
+	var max_laser_left_prob = max_spike_platform_prob + GameManager.laser_left_probability
+	var max_laser_right_prob = max_laser_left_prob + GameManager.laser_right_probability
 
-	if rand < 30:
-		# warning-ignore:return_value_discarded
-		_add_laser_gun(true)
-	elif rand < 60:
-		# warning-ignore:return_value_discarded
-		_add_laser_gun(false)
-	elif rand < 80:
+	if rand < max_door_prob:
 		# warning-ignore:return_value_discarded
 		_add_door()
-	else:
+	elif rand < max_spike_door_prob:
 		# warning-ignore:return_value_discarded
-		_add_platform()
+		_add_spike_door()
+	elif rand < max_platform_prob:
+		# warning-ignore:return_value_discarded
+		_add_platform(false)
+	elif rand < max_spike_platform_prob:
+		# warning-ignore:return_value_discarded
+		_add_platform(true)
+	elif rand < max_laser_left_prob:
+		# warning-ignore:return_value_discarded
+		_add_laser_gun(true)
+	elif rand < max_laser_right_prob:
+		# warning-ignore:return_value_discarded
+		_add_laser_gun(false)
+	else:
+		pass
 
 
 func _physics_process(_delta):
@@ -71,6 +93,8 @@ func _physics_process(_delta):
 			_remove_platform(collision.collider)
 		if collision.collider.is_in_group("doors"):
 			_remove_door(collision.collider)
+		if collision.collider.is_in_group("spikedoors"):
+			_remove_spike_door(collision.collider)
 		if collision.collider.is_in_group("bestfallline"):
 			collision.collider.queue_free()
 
@@ -103,10 +127,12 @@ func _remove_laser_gun(var gun) -> void:
 	laser_gun_op.return_object(gun)
 
 
-func _add_platform() -> bool :
+func _add_platform(var has_spikes : bool) -> bool :
 	var platform = platforms_op.get_object()
 	if not platform:
 		return false
+
+	platform.has_spikes = has_spikes
 
 	var pos = Vector2()
 	pos.x = GameManager.rng.randi_range(30, 100)
@@ -138,3 +164,17 @@ func _remove_door(var door) -> void :
 	$ParallaxLayer.remove_child(door)
 	doors_op.return_object(door)
 
+func _add_spike_door() -> bool :
+	var spike_door = spike_doors_op.get_object()
+	if not spike_door:
+		return false
+	
+	spike_door.position.y = (-1 * scroll_offset.y) + laser_gun_vertical_start_pos
+	
+	$ParallaxLayer.add_child(spike_door)
+	
+	return true
+
+func _remove_spike_door(var door) -> void :
+	$ParallaxLayer.remove_child(door)
+	spike_doors_op.return_object(door)
