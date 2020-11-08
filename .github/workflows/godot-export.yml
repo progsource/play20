@@ -37,6 +37,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: ${{ env.EXPORT_NAME }}-web
+          path: ~/${{ env.EXPORT_NAME }}
       - name: deploy to itch.io (Web)
         uses: josephbmanley/butler-publish-itchio-action@master
         env:
@@ -44,4 +45,4 @@ jobs:
           CHANNEL: html5
           ITCH_GAME: ${{ env.EXPORT_NAME }}
           ITCH_USER: progsource
-          PACKAGE: ${{ env.EXPORT_NAME }}-web
+          PACKAGE: ~/${{ env.EXPORT_NAME }}
