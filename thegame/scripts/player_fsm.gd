@@ -18,7 +18,7 @@ func _state_logic(delta):
 			parent._speed = 0
 		states.fall:
 			parent._speed = parent.max_speed
-			parent._velocity = Vector2.DOWN * parent._speed
+			parent._velocity = Vector2.ZERO * parent._speed
 		states.move:
 			parent._last_input_direction = input.direction if input.direction != Vector2.ZERO else parent._last_input_direction
 			parent._speed = parent.max_speed

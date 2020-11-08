@@ -1,6 +1,6 @@
 extends ParallaxBackground
 
-var speed : float = 30.0
+var speed : float = GameManager.gravity
 var last_created_object_distance : float = 110.0
 var object_distance : float = 100.0
 
@@ -29,6 +29,8 @@ func _enter_tree():
 func _ready():
 	# warning-ignore:return_value_discarded
 	GameManager.connect("prekill", self, "_on_kill")
+	# warning-ignore:return_value_discarded
+	GameManager.connect("speed_up", self, "_on_speed_up")
 
 
 func _on_kill():
@@ -52,9 +54,9 @@ func _spawn_object():
 		GameManager.platform_probabilty +
 		GameManager.spike_platform_probability +
 		GameManager.laser_left_probability +
-		GameManager.laser_right_probability) 
+		GameManager.laser_right_probability)
 	var rand = GameManager.rng.randi_range(0, max_probability)
-	
+
 	var max_door_prob = GameManager.door_probability
 	var max_spike_door_prob = max_door_prob + GameManager.spike_door_probabilty
 	var max_platform_prob = max_spike_door_prob + GameManager.platform_probabilty
@@ -164,17 +166,24 @@ func _remove_door(var door) -> void :
 	$ParallaxLayer.remove_child(door)
 	doors_op.return_object(door)
 
+
 func _add_spike_door() -> bool :
 	var spike_door = spike_doors_op.get_object()
 	if not spike_door:
 		return false
-	
+
 	spike_door.position.y = (-1 * scroll_offset.y) + laser_gun_vertical_start_pos
-	
+
 	$ParallaxLayer.add_child(spike_door)
-	
+
 	return true
 
 func _remove_spike_door(var door) -> void :
 	$ParallaxLayer.remove_child(door)
 	spike_doors_op.return_object(door)
+
+func _on_speed_up(toogle):
+	if toogle:
+		speed = GameManager.gravity + GameManager.gravity * GameManager.speed_up_factor
+	else:
+		speed = GameManager.gravity
