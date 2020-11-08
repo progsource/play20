@@ -44,4 +44,4 @@ jobs:
           CHANNEL: html5
           ITCH_GAME: ${{ env.EXPORT_NAME }}
           ITCH_USER: progsource
-          PACKAGE: ${{ env.EXPORT_NAME }}-web.zip
+          PACKAGE: ${{ env.EXPORT_NAME }}-web
