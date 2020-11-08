@@ -72,6 +72,7 @@ func _spawn_laser() -> void :
 	laser.position = $LaserContainer.position
 	laser.is_left = is_left
 	$LaserContainer.add_child(laser)
+	$Sound.play(0.0 if is_left else 1.0)
 
 
 func remove_laser(var laser) -> void :
