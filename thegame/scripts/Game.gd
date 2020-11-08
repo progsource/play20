@@ -33,6 +33,8 @@ func _unpause():
 func _physics_process(_delta):
 	if player.check_collision() or player.position.y == optimal_position.y:
 		return
+	elif player.position.y > optimal_position.y:
+		player.position.y = optimal_position.y
 	
 	var _distance = Vector2(0.0, player.position.y).distance_to(Vector2(0.0, optimal_position.y))
 	if _distance > 5:
