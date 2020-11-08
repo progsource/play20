@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/Spikes.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://scenes/Wall.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scripts/Game.gd" type="Script" id=5]
 [ext_resource path="res://scenes/ObjectContainer.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/audio/Karstenholymoly_-_Stardust_(Ziggy_is_coming)_1.ogg" type="AudioStream" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 110.203, 10 )
@@ -50,3 +51,8 @@ shape = SubResource( 1 )
 
 [node name="OtimalPosition" type="Position2D" parent="."]
 position = Vector2( 91, 136 )
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+volume_db = -21.714
+autoplay = true
