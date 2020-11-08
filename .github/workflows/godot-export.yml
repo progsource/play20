@@ -28,7 +28,7 @@ jobs:
         with:
           args: zip -qq -r ${{ env.EXPORT_NAME }}-web.zip ./build/web
       - name: Upload Artifact
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v2
         with:
           name: ${{ env.EXPORT_NAME }}-web.zip
   publish-web:
