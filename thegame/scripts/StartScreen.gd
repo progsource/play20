@@ -2,6 +2,7 @@ extends CenterContainer
 
 
 func _ready():
+	$VBoxContainer/Credits.visible = false
 	if OS.has_feature('JavaScript'):
 		$VBoxContainer/Quit.visible = false
 
